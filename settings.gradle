@@ -1,0 +1,5 @@
+rootProject.name = 'user-timings'
+include 'api'
+include 'persistence'
+include 'common'
+

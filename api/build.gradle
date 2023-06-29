@@ -1,0 +1,30 @@
+apply plugin: 'com.palantir.docker'
+
+dependencies {
+    implementation project(":persistence")
+    implementation project(":common")
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+docker {
+    name "${System.env.aws_repo_name}/${System.env.projectName}/${System.env.repoName}"
+    dockerfile file('Dockerfile')
+    tags "${System.env.release_version}", "${System.env.latestTag}"
+    files tasks.bootJar.outputs.files.singleFile
+    buildArgs(['JAR_FILE': "${tasks.bootJar.outputs.files.singleFile.name}"])
+    noCache true
+}
+
+bootJar {
+    enabled = true
+}
+
+jar {
+    enabled = false
+}

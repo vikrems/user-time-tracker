@@ -1,0 +1,12 @@
+dependencies {
+    implementation project(":common")
+    implementation "com.amazonaws:aws-java-sdk-dynamodb:${awsDynamoDbVersion}"
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}

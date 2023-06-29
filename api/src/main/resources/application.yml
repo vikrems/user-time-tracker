@@ -1,0 +1,24 @@
+server:
+  port: 8093
+  servlet:
+    context-path: /in-time
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_URL:localhost:9092}
+    ssl:
+      protocol: ${PROTOCOL:PLAINTEXT}
+    consumer:
+      properties:
+        notification-topic: ${NOTIFICATION_TOPIC:com.hidglobal.oca.events.notification}
+        notification-group: ${DATA_STORE_GROUP:user_tracking_group}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    sessions:
+      enabled:
+  endpoints:
+    web:
+      base-path: /
